@@ -4,9 +4,9 @@ import { ContextGlobal } from "../Components/utils/GlobalContext";
 import Card from "../Components/Card";
 
 const Favs = () => {
-  const { Theme } = useContext(ContextGlobal);
+  const { Theme, favs, setFavs } = useContext(ContextGlobal);
 
-  const [Favs] = useState(JSON.parse(localStorage.getItem("favs") || "[]"));
+  // const [favs, setFavs] = useState(JSON.parse(localStorage.getItem("favs") || []));
 
   return (
     <div
@@ -15,7 +15,7 @@ const Favs = () => {
     >
       <h1>Dentistas Favoritos</h1>
       <div className="card-grid">
-        {Favs?.map((dentista) => {
+        {favs?.map((dentista) => {
           return (
             <Card key={dentista.id} id={dentista.id} name={dentista.name} username={dentista.username}/>
           );

@@ -1,45 +1,46 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ContextGlobal } from "./utils/GlobalContext";
+import {useContext} from 'react';
 
 const Card = ({ name, username, id }) => {
 
-  const agregarFavorito = () => {
+  const {Theme, favs, setFavs} = useContext(ContextGlobal);
+
+  const agregarFavorito = (e) => {
+    e.preventDefault();
     let esFav = false;
-    let favs = JSON.parse(localStorage.getItem("favs") || "[]");
 
-    favs.forEach((e) => {
-      if (e.id === id) {
-        esFav = true;
-        let index = favs.indexOf(e);
-        favs.splice(index, 1);
-      }
-    });
-
-    if (esFav === false) {
-      favs.push({
-        name: name,
-        username: username,
-        id: id,
-      });
+    if (!favs.find(fav => fav.id === id)) {
+      // favs.push({
+      //   name,
+      //   username: username,
+      //   id: id,
+      // });
+      setFavs([...favs, {name, username, id}])
       localStorage.setItem("favs", JSON.stringify(favs));
+      console.table(favs);
       alert(`${name} se agregó a favoritos`);
     } else {
+      setFavs(favs.filter(fav => fav.id !== id));
+      console.table(favs);
       localStorage.setItem("favs", JSON.stringify(favs));
-      alert(`${name} eliminado de favoritos`);
+      alert(`${name} se elimino a favoritos`);
     }
   };
 
   return (
-    <div className="card">
+    <Link to={`/${id}`} className="card" style={{background: Theme.cardBackground}}>
       <img src="/images/doctor.jpg" alt="doctor-img" />
       <h2 className="dentist-name">
-        <Link to={`/${id}`}>{name}</Link>
+        {/* <Link to={`/${id}`}>{name}</Link> */}
+        {name}
       </h2>
       <h3 className="dentist-username">{username}</h3>
       <button onClick={agregarFavorito} className="favButton">
         ⭐
       </button>
-    </div>
+    </Link>
   );
 };
 

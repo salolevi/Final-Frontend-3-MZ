@@ -14,7 +14,7 @@ const Navbar = () => {
                 <Link to={'/'}>Home</Link>
                 <Link to={'/contact'}>Contacto</Link>
                 <Link to={'/favorites'}>Favoritos</Link>
-                <button className={(Theme.color === 'black') ? "fa-solid fa-moon" : "fa-solid fa-sun"} onClick={handleThemeChange} style={{width: "30px", height: "30px"}}></button>
+                <button className={`themeButton ${Theme.color === 'white' && 'darkBtn'}`}/*className={(Theme.color === 'black') ? "fa-solid fa-moon" : "fa-solid fa-sun"}*/ onClick={handleThemeChange} /*style={{width: "30px", height: "30px"}}*/>{Theme.themeButtonIcon}</button>
             </div>
         </nav>
     )

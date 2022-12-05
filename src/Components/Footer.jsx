@@ -4,13 +4,13 @@ import { ContextGlobal } from './utils/GlobalContext'
 
 const Footer = () => {
 
-    const { Theme } = useContext(ContextGlobal)
+    const { Theme, pos, SetPos } = useContext(ContextGlobal)
 
     return (
         <footer style={{background:Theme.backgroundNav, color:Theme.color}}>
             <div>
                 <p>Powered by</p>
-                <img src="/images/DH.png" alt='DH-logo' />
+                <img src="/images/DH.png" style={{filter:Theme.inverted}}  alt='DH-logo' />
             </div>
             <div>
                 <i className="fa-brands fa-facebook face"></i>
